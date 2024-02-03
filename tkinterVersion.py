@@ -20,11 +20,11 @@ class Logo():
     def update(self):
         width = self.__imageLabel.winfo_reqwidth()
 
-        if self.x >= 800 - width:
+        if self.x >= root.winfo_width() - width:
             self.__dx = -uniform(0.5, 1)
         if self.x <= 0:
             self.__dx = uniform(0.5, 1)
-        if self.y >= 600 - (width / 2):
+        if self.y >= root.winfo_height() - (width / 2):
             self.__dy = -uniform(0.5, 1)
         if self.y <= 0:
             self.__dy = uniform(0.5, 1)
@@ -33,6 +33,11 @@ class Logo():
         self.y += self.__dy
 
     def draw(self):
+        bgTextLabel = tkinter.Label(root, text="@safiyurrahman1", bg="black", fg="grey", font=("Century Gothic", 20, "bold"))
+        bgTextLabel.place(relx=0.5, rely=0.5, anchor="center")
+
+        self.__imageLabel.lift(bgTextLabel)
+        
         self.__imageLabel.place(x=self.x, y=self.y)
         self.update()
         self.__imageLabel.after(2, self.draw)
